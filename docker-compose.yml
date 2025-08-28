@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  debian-ssh:
+    build: .
+    container_name: debian-ssh
+    ports:
+      - "2222:22"              # снаружи 2222 -> внутри 22
+    environment:
+      ROOT_PASSWORD: "СМЕНИ-МЕНЯ-на-сильный-пароль"
+    # Если хочешь вход по ключу, положи файл authorized_keys рядом и раскомментируй:
+    volumes:
+      - ./authorized_keys:/root/.ssh/authorized_keys:ro
+    restart: unless-stopped
